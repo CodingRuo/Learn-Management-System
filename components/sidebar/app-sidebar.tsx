@@ -21,8 +21,6 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import Image from "next/image";
-import Logo from "@/public/logo.png";
 
 const data = {
     navMain: [
@@ -98,13 +96,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             className="data-[slot=sidebar-menu-button]:!p-1.5"
                         >
                             <Link href="/">
-                                <Image
-                                    className="invert"
-                                    src={Logo}
-                                    alt="RuoLearn"
-                                    width={150}
-                                    height={150}
-                                />
+                                <h1 className="text-base font-medium">
+                                    RuoLearn
+                                </h1>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
