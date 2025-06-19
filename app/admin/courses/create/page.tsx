@@ -13,6 +13,7 @@ import slugify from "slugify";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CourseLevel, CourseStatus } from "@/lib/generated/prisma";
+import RichTextEditor from "@/components/rich-text-editor/Editor";
 
 export default function CreateCoursePage() {
 
@@ -107,7 +108,7 @@ export default function CreateCoursePage() {
                                     <FormItem className="w-full">
                                         <FormLabel>Description</FormLabel>
                                         <FormControl>
-                                            <Textarea placeholder="Enter course description" {...field} className="min-h-[120px]" />
+                                            <RichTextEditor field={field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
