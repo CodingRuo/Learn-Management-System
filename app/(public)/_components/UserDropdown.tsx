@@ -4,14 +4,10 @@ import {
     HomeIcon,
     LayoutDashboardIcon,
     LogOutIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-} from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -20,11 +16,9 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import Link from "next/link"
-import { authClient } from "@/lib/auth-client"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
+} from "@/components/ui/dropdown-menu";
+import Link from "next/link";
+import { useSignOut } from "@/hooks/use-signout";
 
 interface iAppProps {
     name: string;
@@ -33,30 +27,20 @@ interface iAppProps {
 }
 
 export default function UserDropdown({ name, email, image }: iAppProps) {
-
-    const router = useRouter();
-
-    async function handleLogout() {
-        await authClient.signOut({
-            fetchOptions: {
-                onSuccess: () => {
-                    router.push("/");
-                    toast.success("Logged out successfully");
-                },
-                onError: () => {
-                    toast.error("Failed to logout");
-                }
-            }
-        })
-    }
+    const { handleLogout } = useSignOut();
 
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
+                <Button
+                    variant="ghost"
+                    className="h-auto p-0 hover:bg-transparent"
+                >
                     <Avatar>
                         <AvatarImage src={image} alt="Profile image" />
-                        <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
+                        <AvatarFallback>
+                            {name.charAt(0).toUpperCase()}
+                        </AvatarFallback>
                     </Avatar>
                     <ChevronDownIcon
                         size={16}
@@ -78,29 +62,45 @@ export default function UserDropdown({ name, email, image }: iAppProps) {
                 <DropdownMenuGroup>
                     <DropdownMenuItem asChild>
                         <Link href="/">
-                            <HomeIcon size={16} className="opacity-60" aria-hidden="true" />
+                            <HomeIcon
+                                size={16}
+                                className="opacity-60"
+                                aria-hidden="true"
+                            />
                             <span>Home</span>
                         </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                         <Link href="/courses">
-                            <BookOpenIcon size={16} className="opacity-60" aria-hidden="true" />
+                            <BookOpenIcon
+                                size={16}
+                                className="opacity-60"
+                                aria-hidden="true"
+                            />
                             <span>Courses</span>
                         </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                         <Link href="/dashboard">
-                            <LayoutDashboardIcon size={16} className="opacity-60" aria-hidden="true" />
+                            <LayoutDashboardIcon
+                                size={16}
+                                className="opacity-60"
+                                aria-hidden="true"
+                            />
                             <span>Dashboard</span>
                         </Link>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout}>
-                    <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
+                    <LogOutIcon
+                        size={16}
+                        className="opacity-60"
+                        aria-hidden="true"
+                    />
                     <span>Logout</span>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
-    )
+    );
 }
