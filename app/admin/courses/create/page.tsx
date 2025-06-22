@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CourseLevel, CourseStatus } from "@/lib/generated/prisma";
 import RichTextEditor from "@/components/rich-text-editor/Editor";
+import { FileUploader } from "@/components/file-uploader/Uploader";
 
 export default function CreateCoursePage() {
 
@@ -121,7 +122,8 @@ export default function CreateCoursePage() {
                                     <FormItem className="w-full">
                                         <FormLabel>Thumbnail image</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="thumbnail url" {...field} />
+                                            {/* <Input placeholder="thumbnail url" {...field} /> */}
+                                            <FileUploader />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
